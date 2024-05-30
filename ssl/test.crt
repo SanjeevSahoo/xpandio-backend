@@ -1,0 +1,21 @@
+subject=C = IN, ST = JH, L = Jamshedpur, O = Xpandio Ltd, OU = Xpandio, CN = xpandio.com, emailAddress = test@xpandio.com
+issuer=DC = com, DC = xpandio, DC = tmindia, CN = Xpandio-IssuingCA
+-----BEGIN CERTIFICATE-----
+1tCxDAwNQdbs8Fll73pVz6dr8HAROexI09x0oIHM8/u2s7hduQtb+S1eZwpiwvQZ
+vGJ+xCBma9owmixT22V4AScYDwjQ81mEiDpf5FId/9hP1A8sFfJvnkQkEg==
+-----END CERTIFICATE-----
+
+subject=DC = com, DC = xpandio, DC = india, CN = Xpandio-IssuingCA
+issuer=DC = com, DC = xpandio, DC = india, CN = INDIA ROOT CA01
+-----BEGIN CERTIFICATE-----
+KktnvCoFrTKc5l1KASMqlwzcYcAhSt4PWQqlwhrRaGfPQsynKWZq23Js9iUHlwat
+drw3r9LmL6a56w==
+-----END CERTIFICATE-----
+
+subject=DC = com, DC = xpandio, DC = india, CN = INDIA ROOT CA01
+issuer=DC = com, DC = xpandio, DC = india, CN = INDIA ROOT CA01
+-----BEGIN CERTIFICATE-----
+8nOCOYS+ULvMMF6ayZz/X8ekfxqlUf5xzRpGKrWq96NOa+jyuV/xHvGXVvZ5O+xq
+1z/q9QD1smVfUGcwLImYFmc6BHkAxK6/l8Ua1N5HtoPJZmbcSWFvrw8=
+-----END CERTIFICATE-----
+
