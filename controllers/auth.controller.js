@@ -7,18 +7,7 @@ const logger = require("../utils/logger.js");
 const bcrypt = require("bcrypt");
 const { decryptData, encryptData } = require("../utils/crypto.js");
 
-const LDAP_HOSTS_TML = [
-  {
-    url: "tmjsrinf02.tmindia.tatamotors.com",
-    dn: "DC=tmindia,DC=tatamotors,DC=com",
-    dom: "@tmindia.tatamotors.com",
-  },
-  {
-    url: "tmjsrinf01.tmindia.tatamotors.com",
-    dn: "DC=tmindia,DC=tatamotors,DC=com",
-    dom: "@tmindia.tatamotors.com",
-  },
-];
+const LDAP_HOSTS_TML = [];
 
 exports.refreshToken = async (req, res) => {
   logger.log("info", "PATH -------------- /refreshtoken  ---------------");
@@ -510,47 +499,6 @@ exports.login = async (req, res) => {
   res.status(200).json({ userData: encryptUserData, authToken: jsontoken });
 };
 
-exports.alllocations = async (req, res) => {
-  logger.log("info", "PATH -------------- /alllocations  ---------------");
-  let resultLocations = await database
-    .simpleQuery(
-      `SELECT
-          t1.id,
-          t1.name,
-          t1.status,
-          t1.sht_name,
-          t1.org_id,
-          t1.unit_id,
-          t1.locn_id
-      FROM
-          t_sdt_locations t1          
-      WHERE
-          t1.status = 'Active'          
-      ORDER BY t1.id ASC`,
-      {}
-    )
-    .catch((err) => {
-      return {
-        errorMessage: "Oracle DB Error",
-        errorTransKey: "api_res_oracle_db_error",
-      };
-    });
-
-  if (
-    !resultLocations ||
-    resultLocations.errorMessage ||
-    !resultLocations.rows
-  ) {
-    return res.status(400).json({
-      errorMessage: "DB Query Error. Try again",
-      errorTransKey: "api_res_oracle_db_error",
-    });
-  }
-
-  logger.log("info", "alllocations Success");
-  res.status(200).json([...resultLocations.rows]);
-};
-
 exports.logout = async (req, res) => {
   const { ticketNo } = req.body;
 
@@ -586,36 +534,4 @@ exports.logoutConcurrentLogin = async (req, res) => {
     );
   }
   return res.status(200).json("success");
-};
-
-exports.getUserEmail = async (req, res) => {
-  const { ticketNo } = req.body;
-
-  let resultUserList = await database
-    .simpleQuery(
-      `SELECT nvl(t1.email,'') as email
-      FROM
-          t_frm_users t1
-      WHERE
-            t1.emp_id = ${ticketNo}
-          `
-    )
-    .catch((err) => {
-      return {
-        errorMessage: "Oracle DB Error",
-        errorTransKey: "api_res_oracle_db_error",
-      };
-    });
-
-  if (!resultUserList || resultUserList.errorMessage) {
-    return res.status(400).json({
-      errorMessage: "DB Query Error. Try again",
-      errorTransKey: "api_res_oracle_db_error",
-    });
-  }
-  if (resultUserList.rows[0].EMAIL) {
-    res.status(200).json(resultUserList.rows[0].EMAIL);
-  } else {
-    res.status(200).json("");
-  }
 };
