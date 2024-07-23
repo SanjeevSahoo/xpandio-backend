@@ -29,7 +29,6 @@ function initialize() {
     //VA Closure
     app.disable("x-powered-by");
     app.set("etag", false);
-    //
 
     httpsServer = sslEnabled
       ? https.createServer(httpsOptions, app)
@@ -108,7 +107,9 @@ function initialize() {
       }
 
       console.log(
-        `Web server listening on https://${hostname}:${webServerConfig.port}`
+        `Web server listening on http${sslEnabled ? "s" : ""}://${hostname}:${
+          webServerConfig.port
+        }`
       );
 
       resolve();

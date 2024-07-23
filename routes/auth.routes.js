@@ -4,7 +4,5 @@ const router = express.Router();
 
 router.post("/login", authController.login);
 router.post("/refreshtoken", authController.refreshToken);
-router.post("/logout", authController.logout);
-router.post("/logoutConcurrentLogin", authController.logoutConcurrentLogin);
 
 module.exports = router;
